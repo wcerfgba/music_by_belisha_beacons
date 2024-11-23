@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta lang="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music by Belisha beacons: a sonic exploration of urban infrastructure, by Stella Aster</title>
+  <style>
+    body {
+      background: #002;
+      color: #fff;
+      font-style: 'Times New Roman', serif;
+      margin: auto;
+      max-width: 60rem;
+      margin-bottom: 100rem;
+    }
+    
+    .yellow {
+      color: #ff0;
+    }
+      
+    .blink1200 {
+      animation: blink 1.200s steps(1, end) infinite;
+    }
+    
+    .blink1530 {
+      animation: blink 1.530s steps(1, end) infinite;
+    }
+
+    @keyframes blink {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <h1>Music by <span class="yellow blink1200">Belisha</span> <span class="yellow blink1530">beacons</span></h1>
+  <h2>a sonic exploration of urban infrastructure,<br>by <span class="yellow">Stella Aster</span></h2>
+  
+  <button id="play">Listen to the beacons</button>
+  
+  <script src="http://unpkg.com/tone"></script>
+    
+  <script>
+    const sampler = new Tone.Sampler({
+      urls: {
+        C4: "C4.mp3",
+        "D#4": "Ds4.mp3",
+        "F#4": "Fs4.mp3",
+        A4: "A4.mp3",
+      },
+      release: 1,
+      baseUrl: "https://tonejs.github.io/audio/salamander/",
+    }).toDestination();
+
+    const foo = new Tone.Loop((time) => {
+      sampler.triggerAttackRelease(["Eb4", "G4", "Bb4"], 4);
+    }, '4n').start('8n');
+    
+    document.querySelector('#play').onClick = () => Tone.transport.start();
+  </script>
+</body>
+
+</html>
