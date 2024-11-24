@@ -13,8 +13,7 @@
       font-family: 'Times New Roman', serif;
       margin: auto;
       padding: 1rem;
-      max-width: 60rem;
-      margin-bottom: 100rem;
+      max-width: 50rem;
     }
     
     .yellow {
@@ -41,14 +40,32 @@
       }
     }
 
+    #play {
+      font-size: 1.5rem;
+      padding: 0.5rem;
+    }
+    
+    p {
+      font-size: 1.2rem;
+    }
+    
+    img {
+      max-width: 100%;
+    }
+    
+    #mapWrap {
+        width: 100%;
+        height: 400px; 
+    }   
   </style>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 </head>
 
 <body>
   <h1>Music by <span class="yellow blink1204">Belisha</span> <span class="yellow blink1554">beacons</span></h1>
   <h2>a sonic exploration of urban infrastructure,<br>by <span class="yellow">Stella Aster</span></h2>
   
-  <button id="play">Listen to the beacons</button>
+  <button id="play" disabled>⏯️ Play / Pause</button>
   
   <script src="https://unpkg.com/tone"></script>
     
@@ -102,6 +119,67 @@
         Tone.Transport.seconds =  Date.now() / 1000;
         Tone.Transport.toggle();
       });
+      
+    document.querySelector('#play').disabled = false;
+  </script>
+  
+  <p>In the United Kingdom, pedestrian crossings on roads are called "zebra crossings", because they are marked by white stripes on the grey-black tarmac. Every zebra crossing has two poles with flashing yellow lights, in order to make them more visible to road users at night. These flashing lights are called <span class="yellow">Belisha beacons</span>, named after former Minister for Transport Leslie Hore-Belisha, who introduced them in 1934.</p>
+  
+  <img src="cap_TimeVideo_20241117_213113_00:00:13_01.jpg">
+  
+  <p>On many zebra crossings, the Belisha beacons do not flash at the same time, and have slightly different amounts of time they remain on and off for. As a result, they phase in and out of sync with each other, flashing together for a few seconds, and then drifting apart, alternating, and then gradually coming back together. This dance repeats indefinitely, as they operate continuously 24 hours a day. This idea of <span class="yellow">phase</span> has been explored in music, perhaps most notably by Steve Reich in pieces like <em>Piano Phase</em> from 1967.</p>
+  
+  <img src="cap_TimeVideo_20241119_180700_00:00:00_01.jpg">
+  
+  <p>I've always found the beacons to be beautiful. There is something about their deep yellow glow which warms my soul at night, like tiny suns winking in the darkness. They are a ubiquitous and mundane feature of the British urban environment: you can't walk through a town for long without finding a crossing with a pair of beacons merrily dancing with each other, and to most people they are a purely functional aspect of our transport infrastructure, to be noticed on approach and forgotten once passed. But these joyful creatures have a life of their own, and <span class="yellow">there is music in their dance</span>. I wanted to show how beautiful these flashing beacons are, and bring their music to life.</p>
+  
+  <img src="cap_TimeVideo_20241119_184638_00:00:02_01.jpg">
+  
+  <p>I recorded millisecond-timestamped video footage of two sets of beacons in my hometown of Leyland, Central Lancashire. Using this data, I was able to estimate the on and off periods of each beacon, and their relative phases with each other. When you click the play button at the top of this page, this website uses the current date and time to calculate the current state of each beacon, and plays a piano note when each one turns on. You are therefore listening to a <span class="yellow">live performance</span> of the beacons as they dance tirelessly throughout the days and the nights. This is the hidden music of the streets I walk every day.</p>
+  
+  <p>Like all things, this artwork in this form will eventually fall apart. The phase information that produces this music is only an estimate of the beacons' true behaviour. Over time, this representation will drift away from the dance of the beacons, and will no longer be in sync with them. Just like the beacons and the roads they mark crossings on, this music requires <span class="yellow">regular maintenance</span> in order to remain useful.</p>
+  
+  <p>If you would like to visit the beacons to say hello and watch them dance to their music, here is a map:</p>
+  
+  <div id="mapWrap"></div>
+  
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  
+  <script>
+    // Define multiple markers location, latitude, and longitude
+    const locations = [
+        ['Belisha beacons', 53.6962, -2.6903],
+        ['Belisha beacons', 53.6945, -2.6893],
+    ];
+
+    // Set container element to embed map
+    const map = L.map('mapWrap').setView([locations[0][1], locations[0][2]], 16);
+
+    // Add copyright attribution
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {
+        foo: 'bar',
+        attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}
+    ).addTo(map);
+
+    // Add multiple markers to map
+    for (var i = 0; i < locations.length; i++) {
+        marker = new L.marker(
+            [locations[i][1], locations[i][2]]
+        )
+        .bindPopup(locations[i][0])
+        .addTo(map);
+        
+        // Set zoom level on marker click
+        marker.on('click', function(mrk) {
+            map.setView(
+                [
+                    mrk.latlng.lat,
+                    mrk.latlng.lng
+                ],
+                16
+            );
+        });
+    }
   </script>
 </body>
 
