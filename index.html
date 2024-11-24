@@ -65,53 +65,29 @@
     
     const loops = [
       new Tone.Loop(
-        () => keys.triggerAttackRelease('F2', 0.589),
-        0.589 + 0.602
-      ).start(0),
+        (time) => keys.triggerAttackRelease('F2', 0.602, time),
+        0.602 + 0.589
+      ).start(Date.parse('2024-11-19 18:04:28.388') / 1000),
       new Tone.Loop(
-        () => keys.triggerAttackRelease('A2', 0.753),
-        0.753 + 0.777
-      ).start(0),
+        (time) => keys.triggerAttackRelease('A2', 0.777, time),
+        0.777 + 0.753
+      ).start(Date.parse('2024-11-19 18:04:29.221') / 1000),
       new Tone.Loop(
-        () => keys.triggerAttackRelease('C3', 0.738),
-        0.738 + 0.759
-      ).start(0),
+        (time) => keys.triggerAttackRelease('C3', 0.759, time),
+        0.759 + 0.738
+      ).start(Date.parse('2024-11-19 18:04:28.488') / 1000),
       new Tone.Loop(
-        () => keys.triggerAttackRelease('E3', 0.600),
-        0.600 + 0.900
-      ).start(0),
+        (time) => keys.triggerAttackRelease('E3', 0.900, time),
+        0.900 + 0.600
+      ).start(Date.parse('2024-11-19 18:04:29.821') / 1000),
     ];
-  
-    // Tone.Transport.bpm.value = 60;
   
     document
       .querySelector("#play")
       .addEventListener("click", () => {
-        Tone.Transport.seconds =  (new Date()).getSeconds() + 2000;
-        // It doesn't like when the transport time gets too big, so we're going to
-        // need to handle the modulo maths ourselves. That's OK.
+        Tone.Transport.seconds =  Date.now() / 1000;
         Tone.Transport.toggle();
       });
-  
-  
-  
-  
-//     const sampler = new Tone.Sampler({
-//       urls: {
-//         C4: "C4.mp3",
-//         "D#4": "Ds4.mp3",
-//         "F#4": "Fs4.mp3",
-//         A4: "A4.mp3",
-//       },
-//       release: 1,
-//       baseUrl: "https://tonejs.github.io/audio/salamander/",
-//     }).toDestination();
-// 
-//     const foo = new Tone.Loop((time) => {
-//       sampler.triggerAttackRelease(["Eb4", "G4", "Bb4"], 4);
-//     }, '4n').start('8n');
-//     
-//     document.querySelector('#play').onClick = () => Tone.transport.start();
   </script>
 </body>
 
