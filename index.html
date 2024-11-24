@@ -49,7 +49,7 @@
   
   <button id="play">Listen to the beacons</button>
   
-  <script src="http://unpkg.com/tone"></script>
+  <script src="https://unpkg.com/tone"></script>
     
   <script>
     const keys = new Tone.Sampler({
@@ -97,6 +97,7 @@
     document
       .querySelector("#play")
       .addEventListener("click", () => {
+        keys.detune
         Tone.Transport.seconds =  Date.now() / 1000;
         Tone.Transport.toggle();
       });
