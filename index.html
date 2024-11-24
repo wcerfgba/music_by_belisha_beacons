@@ -52,39 +52,42 @@
   <script src="http://unpkg.com/tone"></script>
     
   <script>
-    const keys = new Tone.PolySynth(Tone.Synth, {
-      volume: -8,
-      oscillator: {
-        partials: [1, 2, 1],
+    const keys = new Tone.Sampler({
+      urls: {
+        C4: "C4.mp3",
+        "D#4": "Ds4.mp3",
+        "F#4": "Fs4.mp3",
+        A4: "A4.mp3",
       },
+      release: 1,
+      baseUrl: "https://tonejs.github.io/audio/salamander/",
     }).toDestination();
-
-    const cChord = ["C4", "E4", "G4", "B4"];
-    const dChord = ["D4", "F4", "A4", "C5"];
-    const gChord = ["B3", "D4", "E4", "A4"];
-
-    const pianoPart = new Tone.Part(
-      (time, chord) => {
-        keys.triggerAttackRelease(chord, "8n", time);
-      },
-      [
-        ["0:0:2", cChord],
-        ["0:1", cChord],
-        ["0:1:3", dChord],
-        ["0:2:2", cChord],
-        ["0:3", cChord],
-        ["0:3:2", gChord],
-      ]
-    ).start("0");
-
-    pianoPart.loop = true;
+    
+    const loops = [
+      new Tone.Loop(
+        () => keys.triggerAttackRelease('F2', 0.589),
+        0.589 + 0.602
+      ).start(0),
+      new Tone.Loop(
+        () => keys.triggerAttackRelease('A2', 0.753),
+        0.753 + 0.777
+      ).start(0),
+      new Tone.Loop(
+        () => keys.triggerAttackRelease('C3', 0.738),
+        0.738 + 0.759
+      ).start(0),
+      new Tone.Loop(
+        () => keys.triggerAttackRelease('E3', 0.600),
+        0.600 + 0.900
+      ).start(0),
+    ];
   
-    Tone.Transport.bpm.value = 60;
+    // Tone.Transport.bpm.value = 60;
   
     document
       .querySelector("#play")
       .addEventListener("click", () => {
-        Tone.Transport.seconds =  (new Date()).getSeconds() + 18237198273198239812739.2349823;
+        Tone.Transport.seconds =  (new Date()).getSeconds() + 2000;
         // It doesn't like when the transport time gets too big, so we're going to
         // need to handle the modulo maths ourselves. That's OK.
         Tone.Transport.toggle();
