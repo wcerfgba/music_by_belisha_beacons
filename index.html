@@ -20,12 +20,12 @@
       color: #ff0;
     }
       
-    .blink1200 {
-      animation: blink 1.200s steps(1, end) infinite;
+    .blink1204 {
+      animation: blink 1.204s steps(1, end) infinite;
     }
     
-    .blink1530 {
-      animation: blink 1.530s steps(1, end) infinite;
+    .blink1554 {
+      animation: blink 1.554s steps(1, end) infinite;
     }
 
     @keyframes blink {
@@ -44,7 +44,7 @@
 </head>
 
 <body>
-  <h1>Music by <span class="yellow blink1200">Belisha</span> <span class="yellow blink1530">beacons</span></h1>
+  <h1>Music by <span class="yellow blink1204">Belisha</span> <span class="yellow blink1554">beacons</span></h1>
   <h2>a sonic exploration of urban infrastructure,<br>by <span class="yellow">Stella Aster</span></h2>
   
   <button id="play">Listen to the beacons</button>
@@ -80,6 +80,18 @@
         (time) => keys.triggerAttackRelease('E3', 0.900, time),
         0.900 + 0.600
       ).start(Date.parse('2024-11-19 18:04:29.821') / 1000),
+      new Tone.Loop(
+        (time) => keys.triggerAttackRelease('G3', 0.778, time),
+        0.778 + 0.761
+      ).start(Date.parse('2024-11-19 18:07:05.924') / 1000),
+      new Tone.Loop(
+        (time) => keys.triggerAttackRelease('B3', 0.767, time),
+        0.767 + 0.761
+      ).start(Date.parse('2024-11-19 18:07:06.257') / 1000),
+      new Tone.Loop(
+        (time) => keys.triggerAttackRelease('D4', 0.894, time),
+        0.894 + 0.605
+      ).start(Date.parse('2024-11-19 18:07:06.623') / 1000),
     ];
   
     document
