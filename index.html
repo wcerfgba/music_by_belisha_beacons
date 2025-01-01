@@ -119,7 +119,6 @@
     document
       .querySelector("#play")
       .addEventListener("click", () => {
-        keys.detune
         Tone.Transport.seconds =  Date.now() / 1000;
         Tone.Transport.toggle();
       });
