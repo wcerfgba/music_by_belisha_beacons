@@ -69,7 +69,7 @@
   <h1>Music by <span class="yellow blink1204">Belisha</span> <span class="yellow blink1554">beacons</span></h1>
   <h2>a sonic exploration of urban infrastructure,<br>by <span class="yellow">Stella Aster</span></h2>
   
-  <button id="play" disabled>⏯️ Play / Pause</button>
+  <button id="play">⏯️ Play / Pause</button>
   
   <script src="https://unpkg.com/tone"></script>
     
@@ -122,8 +122,6 @@
         Tone.Transport.seconds =  Date.now() / 1000;
         Tone.Transport.toggle();
       });
-      
-    document.querySelector('#play').disabled = false;
   </script>
   
   <p>In the United Kingdom, pedestrian crossings on roads are called "zebra crossings", because they are marked by white stripes on the grey-black tarmac. Every zebra crossing has two poles with flashing yellow lights, in order to make them more visible to road users at night. These flashing lights are called <span class="yellow">Belisha beacons</span>, named after former Minister for Transport Leslie Hore-Belisha, who introduced them in 1934.</p>
